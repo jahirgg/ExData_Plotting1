@@ -7,29 +7,11 @@ c <- colnames(read.table("household_power_consumption.txt", nrow = 1, header = T
 ## Asigning the column names to the data
 colnames(dat) <- c
 
-## Plot 1
-par(mfrow=c(1,1)) ## Making sure the plot only fits one graph
-hist(dat[,3],col="red",xlab ="Global Active Power (kilowatts)", main = "Global Active Power")
-dev.copy(png,file="figure/plot1.png")
-dev.off()
-
 # Concatenating Day and Time values
 dates <- paste(dat[,1],dat[,2])
 # Converting to dates
 z <- strptime(dates,"%d/%m/%Y %H:%M:%S")
 
-# Plot 2
-plot(z,dat[,3],ylab = "Global Active Power (kilowatts)", type = "l", xlab = "")
-dev.copy(png,file="figure/plot2.png")
-dev.off()
-
-#Plot 3
-with(dat,plot(z,Sub_metering_1, type="l", ylab = "Energy sub metering"))
-with(dat,points(z,Sub_metering_2,col="red",type="l"))
-with(dat,points(z,Sub_metering_3,col="blue",type="l"))
-legend("topright",pch = "__", col = c("black","red","blue"), legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
-dev.copy(png,file="figure/plot3.png")
-dev.off()
 
 #Plot 4
 par(mfrow = c(2,2))
